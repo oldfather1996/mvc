@@ -1,17 +1,18 @@
 <?php
 
-namespace Webroot;
+use mvc\src\Dispatcher;
 
-use dispatcher\Dispatcher;
+require '../vendor/autoload.php';
 
 define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"]));
 define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
 
-require(ROOT . 'Config/core.php');
 
-require(ROOT . 'router.php');
-require(ROOT . 'request.php');
-require(ROOT . 'dispatcher.php');
+// require(ROOT . 'src/views/tasks/create.php');
+// require(ROOT . 'src/views/tasks/edit.php');
+// require(ROOT . 'src/views/tasks/index.php');
+// require(ROOT . 'src/dispatcher.php');
+
 
 $dispatch = new Dispatcher();
 $dispatch->dispatch();
