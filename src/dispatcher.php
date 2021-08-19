@@ -17,16 +17,12 @@ class Dispatcher
 
         $controller = $this->loadController();
         call_user_func_array([$controller, $this->request->action], $this->request->params);
-        die;
     }
 
     public function loadController()
     {
-        // $name = $this->request->controller . 'Controller';
-        // $file = ROOT . 'src/Controllers/' . $name . '.php';\
-        // $TName = "mvc\src\Controllers\TasksController";
         $name = ucfirst($this->request->controller) . "Controller";
-        $file = "mvc\\src\Controllers\\" . $name;
+        $file = "mvc\src\Controllers\\" . $name;
         $controller = new $file();
         return $controller;
     }
