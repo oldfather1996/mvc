@@ -6,7 +6,6 @@ class Controller
 {
     var $vars = [];
     var $layout = "default";
-
     function set($d)
     {
         $this->vars = array_merge($this->vars, $d);
@@ -15,13 +14,13 @@ class Controller
     function render($filename)
     {
         extract($this->vars);
-        ob_start();
-        require (ROOT . "src/Views/" . ucfirst(str_replace(get_class($this), 'tasks/', get_class($this))) . $filename . '.php');
+        ob_start();    
+        require(ROOT . "Views/" . ucfirst(str_replace(get_class($this), 'tasks/', get_class($this))) . $filename . '.php');
         $content_for_layout = ob_get_clean();
         if ($this->layout == false) {
             $content_for_layout;
         } else {
-            require(ROOT . "src/Views/Layouts/" . $this->layout . '.php');
+            require(ROOT . "Views/Layouts/" . $this->layout . '.php');
         }
     }
 

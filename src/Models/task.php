@@ -18,6 +18,7 @@ class Task extends Model
             'updated_at' => date('Y-m-d H:i:s')
         ]);
     }
+    
     public function showTask($id)
     {
         $sql = "SELECT * FROM tasks WHERE id =" . $id;

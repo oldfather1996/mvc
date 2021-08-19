@@ -16,17 +16,14 @@ class Dispatcher
         Router::parse($this->request->url, $this->request);
 
         $controller = $this->loadController();
-        
         call_user_func_array([$controller, $this->request->action], $this->request->params);
     }
 
     public function loadController()
     {
-        // $name = $this->request->controller . "Controller";
-
-        $TName = 'mvc\src\Controllers\TasksController';
-
-        $controller = new $TName();
+        $name = ucfirst($this->request->controller) . "Controller";
+        $file = "mvc\src\Controllers\\" . $name;
+        $controller = new $file();
         return $controller;
     }
 }

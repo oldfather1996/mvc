@@ -9,7 +9,6 @@ class TasksController extends Controller
 {
     function index()
     {
-        require(ROOT . 'src/Models/Task.php');
 
         $tasks = new Task();
 
@@ -21,10 +20,9 @@ class TasksController extends Controller
     function create()
     {
         if (isset($_POST["title"])) {
-            require(ROOT . 'src/Models/Task.php');
             $task = new Task();
             if ($task->create($_POST["title"], $_POST["description"])) {
-                header("Location: " . WEBROOT . "tasks/index");
+                header("Location: " . WEBROOT);
             }
         }
 
@@ -33,12 +31,11 @@ class TasksController extends Controller
 
     function edit($id)
     {
-        require(ROOT . 'src/Models/Task.php');
         $task = new Task();
         $d["task"] = $task->showTask($id);
         if (isset($_POST["title"])) {
             if ($task->edit($id, $_POST["title"], $_POST["description"])) {
-                header("Location: " . WEBROOT . "tasks/index");
+                header("Location: " . WEBROOT);
             }
         }
         $this->set($d);
@@ -47,11 +44,10 @@ class TasksController extends Controller
 
     function delete($id)
     {
-        require(ROOT . 'src/Models/Task.php');
 
         $task = new Task();
         if ($task->delete($id)) {
-            header("Location: " . WEBROOT . "tasks/index");
+            header("Location: " . WEBROOT);
         }
     }
 }
