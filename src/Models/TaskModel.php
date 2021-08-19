@@ -12,8 +12,6 @@ class TaskModel extends Model
     private $update_at;
     private $id;
 
-
-
     public function setTitle($title)
     {
         $this->title = $title;
@@ -23,7 +21,7 @@ class TaskModel extends Model
     {
         return $this->title;
     }
-    
+
     public function setDescription($description)
     {
         $this->description = $description;
@@ -63,5 +61,4 @@ class TaskModel extends Model
     {
         return $this->id;
     }
-    
 }
