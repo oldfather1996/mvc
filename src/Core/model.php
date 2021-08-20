@@ -5,7 +5,7 @@ namespace mvc\src\Core;
 class Model
 {
 
-    function getProperties()
+    public function getProperties()
     {
         return get_object_vars($this);
     }
