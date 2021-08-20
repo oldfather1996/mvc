@@ -3,27 +3,35 @@
 namespace mvc\src\Controllers;
 
 use mvc\src\Core\Controller;
-use mvc\src\Core\Model;
 use mvc\src\Models\TaskModel;
 use mvc\src\Models\TaskRepository;
 
 class TasksController extends Controller
 {
+    public function __construct()
+    {
+        $this->taskRepository = new TaskRepository();
+    }
+
     function index()
     {
         $task = new TaskModel();
-        $tasks = new TaskRepository();
-        $d['tasks'] = $tasks->getAll($task);
+        $d['tasks'] = $this->taskRepository->getAll($task);
         $this->set($d);
         $this->render("index");
     }
 
     function create()
     {
-        if (isset($_POST["title"])) {
-            $task = new TaskRepository();
-            if ($task->create($_POST["title"], $_POST["description"])) {
+        extract($_POST);
+        if (!empty(isset($_POST['title'])) && !empty(isset($_POST['description']))) {
+            $task = new TaskModel();
+            $task->title = $title;
+            $task->description = $description;
+            if ($this->taskRepository->create($task)) {
                 header("Location: " . WEBROOT);
+            } else {
+                echo "wrong";
             }
         }
 
@@ -32,10 +40,13 @@ class TasksController extends Controller
 
     function edit($id)
     {
-        $task = new TaskRepository();
-        $d["task"] = $task->get($id);
+        $d["tasks"] = $this->taskRepository->get($id);
         if (isset($_POST["title"])) {
-            if ($task->edit($id, $_POST["title"], $_POST["description"])) {
+            $task = new TaskModel();
+            $task->setId($id);
+            $task->setTitle($_POST["title"]);
+            $task->setDescription($_POST["description"]);
+            if ($this->taskRepository->edit($task)) {
                 header("Location: " . WEBROOT);
             }
         }

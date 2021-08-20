@@ -14,8 +14,14 @@ class Controller
     function render($filename)
     {
         extract($this->vars);
-        ob_start();    
-        require(ROOT . "Views/" . ucfirst(str_replace(get_class($this), 'tasks/', get_class($this))) . $filename . '.php');
+        ob_start();
+        $url = ($_SERVER["REQUEST_URI"]);
+        $url = explode('/', $url);
+        if ($url[2] === "students") {
+            require(ROOT . "Views/" . ucfirst(str_replace(get_class($this), 'students/', get_class($this))) . $filename . '.php');
+        } else {
+            require(ROOT . "Views/" . ucfirst(str_replace(get_class($this), 'tasks/', get_class($this))) . $filename . '.php');
+        }
         $content_for_layout = ob_get_clean();
         if ($this->layout == false) {
             $content_for_layout;

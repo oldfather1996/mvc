@@ -4,7 +4,7 @@ namespace Mvc\Src\Views\Tasks;
 
 ?>
 
-<h1>Tasks</h1>
+<h1><a href="../mvc/students">tasks</a></h1>
 <div class="row col-md-12 centered">
     <table class="table table-striped custab">
         <thead>

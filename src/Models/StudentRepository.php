@@ -2,13 +2,13 @@
 
 namespace mvc\src\Models;
 
-class TaskRepository
+class StudentRepository
 {
-    protected $taskResouce;
+    protected $studentResouce;
 
     public function __construct()
     {
-        $this->taskResouce = new TaskResourceModel('tasks', null, new TaskModel);
+        $this->taskResouce = new StudentResourceModel('students', null, new StudentModel);
     }
 
     public function getAll()

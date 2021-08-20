@@ -2,6 +2,7 @@
 
 namespace mvc\src;
 
+use mvc\src\Controllers\StudentsController;
 use mvc\src\Router;
 
 class Dispatcher

@@ -6,11 +6,11 @@ use mvc\src\Core\Model;
 
 class TaskModel extends Model
 {
-    private $title;
-    private $description;
-    private $create_at;
-    private $update_at;
-    private $id;
+    public $title;
+    public $description;
+    public $created_at;
+    public $updated_at;
+    public $id;
 
     public function setTitle($title)
     {
@@ -32,24 +32,24 @@ class TaskModel extends Model
         return $this->description;
     }
 
-    public function setCreate_at($create_at)
+    public function setCreate_at($created_at)
     {
-        $this->create_at = $create_at;
+        $this->created_at = $created_at;
     }
 
     public function getCreate_at()
     {
-        return $this->create_at;
+        return $this->created_at;
     }
 
-    public function setUpdate_at($update_at)
+    public function setUpdate_at($updated_at)
     {
-        $this->update_at = $update_at;
+        $this->updated_at = $updated_at;
     }
 
     public function getUpdate_at()
     {
-        return $this->update_at;
+        return $this->updated_at;
     }
 
     public function setId($id)
