@@ -20,7 +20,7 @@ class ResouceModel implements ResourceModelInterface
 
     public function save($model)
     {
-        $array = [];
+        $keyArray = [];
         $properties = $model->getProperties();
 
         if ($model->id === null) {
@@ -28,33 +28,28 @@ class ResouceModel implements ResourceModelInterface
         }
 
         foreach ($properties as $key => $value) {
-            array_push($array, ':' . $key);
+            array_push($keyArray, ':' . $key);
         }
 
-        $array2 = [];
+        $valueArray = [];
         foreach (array_keys($properties) as $key => $value) {
             if ($value !== 'id') {
-                array_push($array2, $value . '= :' . $value);
+                array_push($valueArray, $value . '= :' . $value);
             }
         }
 
-        $array2 = implode(',', $array2);
-        $array2String = implode(',', array_keys($properties));
-        $arrayString = implode(',', $array);
-
+        $valueArray = implode(',', $valueArray);
+        $valueString = implode(',', array_keys($properties));
+        $keyString = implode(',', $keyArray);
         if ($model->id === null) {
-            $sql = "INSERT INTO $this->table ($array2String) VALUES ($arrayString)";
+            $sql = "INSERT INTO $this->table ($valueString) VALUES ($keyString)";
             $req = Database::getBdd()->prepare($sql);
             $date = array("created_at" => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'));
             $arrayMerge = (array_merge($properties, $date));
-            var_dump($arrayString);
-            echo "<br>";
-            var_dump($array2String);
             return $req->execute($arrayMerge);
         } else {
-            $fixArray =  str_replace("created_at= :created_at,updated_at= :updated_at", "updated_at= :updated_at", $array2);
+            $fixArray =  str_replace("created_at= :created_at,updated_at= :updated_at", "updated_at= :updated_at", $valueArray);
             $sql = "UPDATE $this->table SET " . $fixArray . ' where id = :id';
-            echo "<br>";
             $req = Database::getBDD()->prepare($sql);
             $date = array('updated_at' => date('Y-m-d H:i:s'));
             unset($properties['created_at']);
